@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "types": ["react/next", "react-dom/next", "node"],
+    "target": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
@@ -18,9 +19,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+         "src/*": ["src/*"]
+     },
   },
-  "include": [
-    "src"
-  ]
+    "include": ["src"],
 }
