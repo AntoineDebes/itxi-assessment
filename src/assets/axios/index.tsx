@@ -5,8 +5,8 @@ interface ApiProps {
   fetchApiUrl: string;
   data?: any;
   params?: any;
-  tokenProp?: any;
-  setIsLoading?: Function;
+  headers?: any;
+  auth?: any;
 }
 
 const AxiosApi = ({
@@ -14,32 +14,29 @@ const AxiosApi = ({
   fetchApiUrl,
   data,
   params,
-  tokenProp,
-  setIsLoading,
+  headers,
+  auth,
 }: ApiProps) => {
-  const token = tokenProp || localStorage.getItem("appToken") || "";
+  const token = localStorage.getItem("accessToken") || "";
 
   return new Promise<AxiosResponse>(async (res, rej) => {
-    setIsLoading && setIsLoading(true);
+    console.log("token", token);
+
     try {
       const ApiData = await Axios({
         method, // Method like GET, POST, DELETE, PUT ...
-        url: `${process.env.REACT_APP_API_URL}${fetchApiUrl}`,
+        url: fetchApiUrl,
         headers: {
-          "auth-token": token, // sending the token for the verification
+          Authorization: token,
+          ...headers,
         },
-        withCredentials: false,
+        auth: auth,
+        params: params,
         data, // data passed
-        params,
         timeout: 30000,
       });
-      setIsLoading && setIsLoading(false);
-      if (ApiData?.data?.hasError) {
-        throw new Error(ApiData?.data?.hasError);
-      }
       res(ApiData);
     } catch (err) {
-      setIsLoading && setIsLoading(false);
       rej(err);
     }
   });

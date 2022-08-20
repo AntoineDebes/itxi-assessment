@@ -1,0 +1,7 @@
+@use "src/utils";
+
+.artist-card {
+  &__container {
+    @include utils.flexTemplate("space-between");
+  }
+}
