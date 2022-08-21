@@ -28,7 +28,7 @@ const App: FC = () => {
     []
   );
   return (
-    <div className="App">
+    <div className="wrapper">
       <Router>
         <ThemeProvider theme={theme}>
           <CssBaseline />

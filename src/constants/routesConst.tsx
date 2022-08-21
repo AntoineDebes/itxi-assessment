@@ -1,5 +1,6 @@
+import UseFormContextWrapper from "src/context/UseFormContextWrapper";
 import { MainLayout } from "src/layouts";
-import { ArtistSearch, Login } from "src/pages";
+import { ArtistSearch, Login, HomePage } from "src/pages";
 
 const routesConst = [
   {
@@ -7,12 +8,17 @@ const routesConst = [
     // protectedRoute: <SuperAdminAndAdminProtectedRoute />,
     pages: [
       {
-        // context: <ContextRenderingRoute />,
+        context: <UseFormContextWrapper />,
+        path: "/",
+        component: <HomePage />,
+      },
+      {
+        context: <UseFormContextWrapper />,
         path: "/login",
         component: <Login />,
       },
       {
-        // context: <ContextFormContextRoute />,
+        context: <UseFormContextWrapper />,
         path: "/artist-search",
         component: <ArtistSearch />,
       },

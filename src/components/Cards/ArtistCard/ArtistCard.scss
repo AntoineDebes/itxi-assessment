@@ -2,6 +2,6 @@
 
 .artist-card {
   &__container {
-    @include utils.flexTemplate("space-between");
+    @include utils.flexTemplate(space-between, column, 1em);
   }
 }

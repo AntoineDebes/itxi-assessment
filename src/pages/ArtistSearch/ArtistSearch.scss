@@ -1,0 +1,15 @@
+@use "src/utils";
+
+.artist-search {
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  @include utils.gridTemplate(repeat(12, 1fr));
+
+  &__form {
+    grid-column: 1 / -1;
+  }
+  &__card {
+    grid-column: span 3;
+  }
+}

@@ -10,6 +10,7 @@ interface ArtistCardProps {
   popularity: number;
   followers: number;
   artistId: number;
+  className?: string;
 }
 
 export const ArtistCard: React.FC<ArtistCardProps> = ({
@@ -18,20 +19,20 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
   popularity,
   followers,
   artistId,
+  className,
 }) => {
-  useEffect(() => {
-    console.log("image", image);
-  }, [image]);
   return (
-    <Box className="artist-card__container">
-      {/* <img src={image} /> */}
+    <Box className={`artist-card__container ${className}`}>
       <LazyLoadImage
         alt="asd"
         effect="blur"
         height={100}
-        src={image} // use normal <img> attributes as props
+        src={image}
         width={100}
       />
+      <div>{name}</div>
+      <div>{followers}</div>
+      <div>{popularity}</div>
     </Box>
   );
 };
