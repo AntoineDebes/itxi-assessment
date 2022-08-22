@@ -8,19 +8,16 @@ import { CustomTextField } from "src/components/Forms";
 import "./Login.scss";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
+import { LoginModel } from "src/types/LoginModel";
 
 interface LoginProps {}
 
 const Login: React.FC<LoginProps> = ({}) => {
   const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false);
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useFormContext<any>();
+  const { handleSubmit } = useFormContext<LoginModel>();
   const navigate = useNavigate();
 
-  const handleLogin: SubmitHandler<any> = async (data) => {
+  const handleLogin: SubmitHandler<LoginModel> = async (data) => {
     setIsButtonLoading(true);
     const client_id = "88b145456e4d4f2cb08ca25090595136"; // Your client id
     const client_secret = "282eeb1869ed46d1882af549abcecda5"; // Your secret
