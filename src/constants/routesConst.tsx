@@ -1,6 +1,6 @@
 import UseFormContextWrapper from "src/context/UseFormContextWrapper";
 import { MainLayout } from "src/layouts";
-import { ArtistSearch, Login, HomePage } from "src/pages";
+import { ArtistSearch, Login, HomePage, ArtistAlbumSearch } from "src/pages";
 
 const routesConst = [
   {
@@ -21,6 +21,11 @@ const routesConst = [
         context: <UseFormContextWrapper />,
         path: "/artist-search",
         component: <ArtistSearch />,
+      },
+      {
+        context: <UseFormContextWrapper />,
+        path: "/artist-album:artistID/:artistName",
+        component: <ArtistAlbumSearch />,
       },
     ],
   },

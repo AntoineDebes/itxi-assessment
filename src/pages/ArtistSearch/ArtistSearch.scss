@@ -4,11 +4,20 @@
   min-height: 100vh;
   height: 100%;
   width: 100%;
-  @include utils.gridTemplate(repeat(12, 1fr));
+  @include utils.flexTemplate(flex-start, column, 3em);
+  padding-top: 2em;
 
   &__form {
     grid-column: 1 / -1;
+    align-self: center;
   }
+
+  &__cards-container {
+    @include utils.gridTemplate(repeat(12, 1fr));
+    gap: 2em;
+    padding-top: 2em;
+  }
+
   &__card {
     grid-column: span 3;
   }

@@ -11,7 +11,7 @@ interface CustomIconTextFieldProps {
   endAdornmentProp?: ReactElement<SvgIconComponent>;
 }
 
-export const CustomIconTextField: React.FC<CustomIconTextFieldProps> = ({
+const CustomIconTextField: React.FC<CustomIconTextFieldProps> = ({
   reigsterName,
   required = false,
   label,

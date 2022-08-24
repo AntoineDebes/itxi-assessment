@@ -8,7 +8,7 @@ interface CustomTextFieldProps {
   required?: boolean;
 }
 
-export const CustomTextField: React.FC<CustomTextFieldProps> = ({
+const CustomTextField: React.FC<CustomTextFieldProps> = ({
   reigsterName,
   required = false,
   label,

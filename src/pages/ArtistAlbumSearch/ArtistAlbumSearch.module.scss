@@ -1,0 +1,4 @@
+@use "src/utils";
+.pageContainer {
+  @include utils.flexTemplate(flex-start, column, 2em);
+}

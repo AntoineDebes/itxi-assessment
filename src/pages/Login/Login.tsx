@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useFormContext, SubmitHandler } from "react-hook-form";
 import { Box } from "@mui/material";
 import AxiosApi from "src/assets/axios";
@@ -7,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { CustomTextField } from "src/components/Forms";
 import "./Login.scss";
 import { LoadingButton } from "@mui/lab";
-import { useState } from "react";
 import { LoginModel } from "src/types/LoginModel";
 
 interface LoginProps {}
@@ -60,7 +60,7 @@ const Login: React.FC<LoginProps> = ({}) => {
         onSubmit={handleSubmit(handleLogin)}
         className="login__form"
         sx={{
-          border: "1px solid black",
+          boxShadow: "0px 0px 8px black",
           borderRadius: 4,
           padding: "2em",
         }}

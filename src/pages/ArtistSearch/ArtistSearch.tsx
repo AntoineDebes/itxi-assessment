@@ -13,7 +13,7 @@ import { FetchArtistsModel } from "src/types/FetchArtistsModel";
 
 interface ArtistSearchProps {}
 
-export const ArtistSearch: React.FC<ArtistSearchProps> = ({}) => {
+const ArtistSearch: React.FC<ArtistSearchProps> = ({}) => {
   const { handleSubmit } = useFormContext<FetchArtistsModel>();
   const [searchTerm, setSearchTerm] = useState<string>();
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
@@ -44,7 +44,7 @@ export const ArtistSearch: React.FC<ArtistSearchProps> = ({}) => {
     try {
       const response = await AxiosApi({
         method: "GET",
-        fetchApiUrl: `${ServerUrls.SEARCH}search`,
+        fetchApiUrl: `${ServerUrls.ARTIST_SEARCH}search`,
         params: params,
         headers: headers,
       });
@@ -59,7 +59,7 @@ export const ArtistSearch: React.FC<ArtistSearchProps> = ({}) => {
     <div className="artist-search">
       <Box
         component="form"
-        className="artist-search__form"
+        // className="artist-search__form"
         onChange={(event: any) => {
           setSearchTerm(event);
         }}
@@ -70,17 +70,19 @@ export const ArtistSearch: React.FC<ArtistSearchProps> = ({}) => {
           endAdornmentProp={<SearchIcon />}
         />
       </Box>
-      {artistsResponseData?.items?.map((_item: any, i: number) => (
-        <ArtistCard
-          key={i}
-          className="artist-search__card"
-          name={_item.name}
-          image={_item.images[1]?.url ?? SpotifyIconLogo}
-          popularity={_item.popularity}
-          followers={_item.followers.total}
-          artistId={_item.id}
-        />
-      ))}
+      <div className="artist-search__cards-container">
+        {artistsResponseData?.items?.map((_item: any, i: number) => (
+          <ArtistCard
+            key={i}
+            className="artist-search__card"
+            name={_item.name}
+            image={_item.images[1]?.url ?? SpotifyIconLogo}
+            popularity={_item.popularity}
+            followers={_item.followers.total}
+            artistID={_item.id}
+          />
+        ))}
+      </div>
     </div>
   );
 };

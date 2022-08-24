@@ -2,9 +2,9 @@ import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import "./ArtistCard.scss";
+import "./ArtistAlbumCard.module.scss";
 
-interface ArtistCardProps {
+interface ArtistAlbumCardProps {
   name: string;
   image: string;
   popularity: number;
@@ -13,7 +13,7 @@ interface ArtistCardProps {
   className?: string;
 }
 
-const ArtistCard: React.FC<ArtistCardProps> = ({
+const ArtistAlbumCard: React.FC<ArtistAlbumCardProps> = ({
   name,
   image,
   popularity,
@@ -41,4 +41,4 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
   );
 };
 
-export default ArtistCard;
+export default ArtistAlbumCard;
