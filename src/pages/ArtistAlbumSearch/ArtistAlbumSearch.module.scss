@@ -1,5 +1,5 @@
 @use "src/utils";
 .pageContainer {
   @include utils.flexTemplate(flex-start, column, 2em);
-  padding: 2em 4em 0 4em;
+  padding: 2em 4em 2em 4em;
 }

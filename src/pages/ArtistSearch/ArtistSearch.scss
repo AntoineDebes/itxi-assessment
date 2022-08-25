@@ -5,7 +5,7 @@
   height: 100%;
   width: 100%;
   @include utils.flexTemplate(flex-start, column, 3em);
-  padding: 2em 4em 0 4em;
+  padding: 2em 4em 2em 4em;
 
   &__form {
     grid-column: 1 / -1;
