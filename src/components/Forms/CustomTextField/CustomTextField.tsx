@@ -6,12 +6,14 @@ interface CustomTextFieldProps {
   reigsterName: string;
   label: string;
   required?: boolean;
+  type?: React.InputHTMLAttributes<unknown>["type"];
 }
 
 const CustomTextField: React.FC<CustomTextFieldProps> = ({
   reigsterName,
   required = false,
   label,
+  type = "text",
 }) => {
   const {
     register,
@@ -29,6 +31,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
           message: helperTextMessage,
         },
       })}
+      type={type}
     />
   );
 };

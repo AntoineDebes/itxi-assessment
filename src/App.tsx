@@ -4,6 +4,7 @@ import Routes from "./components/Routes";
 import { FC, useMemo } from "react";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme, CssBaseline } from "@mui/material";
+import { AppDataStoreContextProvider } from "./context/AppDataStore";
 
 const App: FC = () => {
   const theme: any = useMemo(
@@ -13,6 +14,13 @@ const App: FC = () => {
           fontFamily: "Roboto",
         },
         components: {
+          MuiLink: {
+            styleOverrides: {
+              root: {
+                color: "black",
+              },
+            },
+          },
           MuiFormHelperText: {
             styleOverrides: {
               root: {
@@ -28,14 +36,16 @@ const App: FC = () => {
     []
   );
   return (
-    <div className="wrapper">
-      <Router>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Routes />
-        </ThemeProvider>
-      </Router>
-    </div>
+    <main className="wrapper">
+      <AppDataStoreContextProvider>
+        <Router>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Routes />
+          </ThemeProvider>
+        </Router>
+      </AppDataStoreContextProvider>
+    </main>
   );
 };
 

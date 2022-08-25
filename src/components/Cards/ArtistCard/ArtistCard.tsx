@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import "./ArtistCard.scss";
+import { Rating, Typography } from "@mui/material";
+import { useEffect } from "react";
 
 interface ArtistCardProps {
   name: string;
@@ -10,7 +12,7 @@ interface ArtistCardProps {
   popularity: number;
   followers: number;
   artistID: number;
-  className?: string;
+  className: string;
 }
 
 const ArtistCard: React.FC<ArtistCardProps> = ({
@@ -21,22 +23,30 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
   artistID,
   className,
 }) => {
+  const transformedPopularityIntoDividedByFive =
+    popularity && (popularity * 5) / 100;
+
   return (
     <Box
-      className={`artist-card__container ${className}`}
+      className={`card__container ${className}`}
       component={Link}
       to={`/artist-album${artistID}/${name}`}
     >
-      <LazyLoadImage
-        alt="asd"
-        effect="blur"
-        height={100}
-        src={image}
-        width={100}
-      />
-      <div>{name}</div>
-      <div>{followers}</div>
-      <div>{popularity}</div>
+      <div className="card__img-container">
+        <LazyLoadImage alt="asd" effect="blur" src={image} width="100%" />
+      </div>
+      <div className="card__content-container">
+        <div className="card__content-container__holder">
+          <p className="card__artist-name">{name}</p>
+          <Typography>{followers?.toLocaleString()} followers</Typography>
+        </div>
+        <Rating
+          name="read-only"
+          value={transformedPopularityIntoDividedByFive}
+          precision={0.5}
+          readOnly
+        />
+      </div>
     </Box>
   );
 };

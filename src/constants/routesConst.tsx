@@ -1,3 +1,4 @@
+// import { AppDataStoreContextProvider } from "src/context/AppDataStore";
 import UseFormContextWrapper from "src/context/UseFormContextWrapper";
 import { MainLayout } from "src/layouts";
 import { ArtistSearch, Login, HomePage, ArtistAlbumSearch } from "src/pages";
@@ -5,7 +6,7 @@ import { ArtistSearch, Login, HomePage, ArtistAlbumSearch } from "src/pages";
 const routesConst = [
   {
     template: <MainLayout />,
-    // protectedRoute: <SuperAdminAndAdminProtectedRoute />,
+    // globalSectionContext: <AppDataStoreContextProvider />,
     pages: [
       {
         context: <UseFormContextWrapper />,

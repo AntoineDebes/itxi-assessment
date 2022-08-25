@@ -9,26 +9,39 @@ import { CustomTextField } from "src/components/Forms";
 import "./Login.scss";
 import { LoadingButton } from "@mui/lab";
 import { LoginModel } from "src/types/LoginModel";
+import { useAppDataStoreContext } from "src/context/AppDataStore";
 
 interface LoginProps {}
 
 const Login: React.FC<LoginProps> = ({}) => {
-  const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false);
+  const [isButtonLoading, setIsButtonLoading] = useState<{
+    login: boolean;
+    loginAsAdmin: boolean;
+  }>({
+    login: false,
+    loginAsAdmin: false,
+  });
+  const { setSnack } = useAppDataStoreContext();
+  const client_id = process.env.REACT_APP_CLIENT_ID!;
+  const client_secret = process.env.REACT_APP_CLIENT_SECRET!;
   const { handleSubmit } = useFormContext<LoginModel>();
   const navigate = useNavigate();
 
-  const handleLogin: SubmitHandler<LoginModel> = async (data) => {
-    setIsButtonLoading(true);
-    const client_id = "88b145456e4d4f2cb08ca25090595136"; // Your client id
-    const client_secret = "282eeb1869ed46d1882af549abcecda5"; // Your secret
+  const handleLogin: SubmitHandler<LoginModel> = async ({
+    id,
+    secret,
+    shouldLoginBtnLoad = true,
+  }) => {
+    shouldLoginBtnLoad &&
+      setIsButtonLoading((preValue: any) => ({ ...preValue, login: true }));
 
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/x-www-form-urlencoded",
     };
     const auth = {
-      username: data.id,
-      password: data.secret,
+      username: id,
+      password: secret,
     };
 
     const dataParam = {
@@ -46,11 +59,21 @@ const Login: React.FC<LoginProps> = ({}) => {
       localStorage.setItem("accessToken", tokenConcact);
       if (response.status === 200) {
         navigate("/artist-search");
+        setSnack({
+          message: "Welcome",
+          open: true,
+          severity: "success",
+        });
       }
-      setIsButtonLoading(false);
+      setIsButtonLoading({
+        loginAsAdmin: false,
+        login: false,
+      });
     } catch (error) {
-      setIsButtonLoading(false);
-      console.log(error);
+      setIsButtonLoading({
+        loginAsAdmin: false,
+        login: false,
+      });
     }
   };
   return (
@@ -66,10 +89,33 @@ const Login: React.FC<LoginProps> = ({}) => {
         }}
       >
         <CustomTextField reigsterName="id" label="User ID" required />
-        <CustomTextField reigsterName="secret" label="User Secret" required />
-        <LoadingButton type="submit" loading={isButtonLoading}>
-          login
-        </LoadingButton>
+        <CustomTextField
+          reigsterName="secret"
+          label="User Secret"
+          required
+          type="password"
+        />
+        <div className="login__form__btn-container">
+          <LoadingButton type="submit" loading={isButtonLoading.login}>
+            login
+          </LoadingButton>
+          <LoadingButton
+            onClick={() => {
+              setIsButtonLoading((preValue: any) => ({
+                ...preValue,
+                loginAsAdmin: true,
+              }));
+              handleLogin({
+                id: client_id,
+                secret: client_secret,
+                shouldLoginBtnLoad: false,
+              });
+            }}
+            loading={isButtonLoading.loginAsAdmin}
+          >
+            login as a guest
+          </LoadingButton>
+        </div>
       </Box>
     </div>
   );

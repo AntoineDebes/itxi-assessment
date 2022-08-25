@@ -20,8 +20,6 @@ const AxiosApi = ({
   const token = localStorage.getItem("accessToken") || "";
 
   return new Promise<AxiosResponse>(async (res, rej) => {
-    console.log("token", token);
-
     try {
       const ApiData = await Axios({
         method, // Method like GET, POST, DELETE, PUT ...
@@ -32,7 +30,7 @@ const AxiosApi = ({
         },
         auth: auth,
         params: params,
-        data, // data passed
+        data,
         timeout: 30000,
       });
       res(ApiData);

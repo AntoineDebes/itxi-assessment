@@ -9,7 +9,7 @@ const UseFormContextWrapper: ReactFCC<UseFormContextWrapperProps> = ({
   const methods = useForm({
     mode: "all",
     shouldFocusError: true,
-    shouldUnregister: true,
+    shouldUnregister: false,
   });
   return (
     <FormProvider {...methods}>

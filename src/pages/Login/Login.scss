@@ -1,4 +1,8 @@
 @use "src/utils";
 .login__form {
   @include utils.flexTemplate(center, column, 1.5em);
+
+  &__btn-container {
+    @include utils.flexTemplate(center, column, 0.5em);
+  }
 }

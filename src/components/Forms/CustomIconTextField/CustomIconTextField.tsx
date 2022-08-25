@@ -9,6 +9,7 @@ interface CustomIconTextFieldProps {
   required?: boolean;
   startAdornmentProp?: ReactElement<SvgIconComponent>;
   endAdornmentProp?: ReactElement<SvgIconComponent>;
+  fullWidth?: boolean;
 }
 
 const CustomIconTextField: React.FC<CustomIconTextFieldProps> = ({
@@ -17,6 +18,7 @@ const CustomIconTextField: React.FC<CustomIconTextFieldProps> = ({
   label,
   startAdornmentProp = undefined,
   endAdornmentProp = undefined,
+  fullWidth = false,
 }) => {
   const {
     register,
@@ -34,6 +36,7 @@ const CustomIconTextField: React.FC<CustomIconTextFieldProps> = ({
           message: helperTextMessage,
         },
       })}
+      fullWidth={fullWidth}
       InputProps={{
         startAdornment: startAdornmentProp && (
           <InputAdornment position="start">{startAdornmentProp}</InputAdornment>

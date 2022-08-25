@@ -10,6 +10,8 @@ import "./ArtistSearch.scss";
 import { CustomIconTextField } from "src/components/Forms";
 import SearchIcon from "@mui/icons-material/Search";
 import { FetchArtistsModel } from "src/types/FetchArtistsModel";
+import { useAppDataStoreContext } from "src/context/AppDataStore";
+import { BottomScrollListener } from "react-bottom-scroll-listener";
 
 interface ArtistSearchProps {}
 
@@ -17,10 +19,24 @@ const ArtistSearch: React.FC<ArtistSearchProps> = ({}) => {
   const { handleSubmit } = useFormContext<FetchArtistsModel>();
   const [searchTerm, setSearchTerm] = useState<string>();
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
-  const [artistsResponseData, setArtistsResponseData] = useState<any>({});
+  const pageLimit = 10;
+  const {
+    artistData,
+    setArtistData,
+    artistSearchOffset,
+    setArtistSearchOffset,
+  } = useAppDataStoreContext();
+
+  useEffect(() => {
+    if (artistSearchOffset !== 1) {
+      handleSubmit(handleOnchangeFetchArtists)(debouncedSearchTerm);
+    }
+  }, [artistSearchOffset]);
 
   useEffect(() => {
     if (debouncedSearchTerm) {
+      setArtistData([]);
+      setArtistSearchOffset(1);
       handleSubmit(handleOnchangeFetchArtists)(debouncedSearchTerm);
     }
   }, [debouncedSearchTerm]);
@@ -28,13 +44,11 @@ const ArtistSearch: React.FC<ArtistSearchProps> = ({}) => {
   const handleOnchangeFetchArtists: SubmitHandler<FetchArtistsModel> = async (
     data
   ) => {
-    setArtistsResponseData({});
     let params = {
       q: data.searchName,
       type: "artist",
-      market: "es",
       limit: 10,
-      offset: 1,
+      offset: artistSearchOffset,
     };
     const headers = {
       Accept: "application/json",
@@ -48,8 +62,10 @@ const ArtistSearch: React.FC<ArtistSearchProps> = ({}) => {
         params: params,
         headers: headers,
       });
-      console.log(response);
-      setArtistsResponseData(response.data.artists);
+      setArtistData((preValue: any) => [
+        ...preValue,
+        ...response.data.artists.items,
+      ]);
     } catch (error) {
       console.log(error);
     }
@@ -59,19 +75,22 @@ const ArtistSearch: React.FC<ArtistSearchProps> = ({}) => {
     <div className="artist-search">
       <Box
         component="form"
-        // className="artist-search__form"
+        className="artist-search__form"
         onChange={(event: any) => {
           setSearchTerm(event);
         }}
       >
-        <CustomIconTextField
-          label="Search for an artist..."
-          reigsterName="searchName"
-          endAdornmentProp={<SearchIcon />}
-        />
+        <div className="artist-search__form__search-container">
+          <CustomIconTextField
+            label="Search for an artist..."
+            reigsterName="searchName"
+            endAdornmentProp={<SearchIcon />}
+            fullWidth
+          />
+        </div>
       </Box>
       <div className="artist-search__cards-container">
-        {artistsResponseData?.items?.map((_item: any, i: number) => (
+        {artistData?.map((_item: any, i: number) => (
           <ArtistCard
             key={i}
             className="artist-search__card"
@@ -82,6 +101,10 @@ const ArtistSearch: React.FC<ArtistSearchProps> = ({}) => {
             artistID={_item.id}
           />
         ))}
+        <BottomScrollListener
+          onBottom={() => setArtistSearchOffset(artistSearchOffset + pageLimit)}
+          debounce={300}
+        />
       </div>
     </div>
   );
