@@ -37,7 +37,9 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
       </div>
       <div className="card__content-container">
         <div className="card__content-container__holder">
-          <p className="card__artist-name">{name}</p>
+          <p className="card__artist-name" title={name}>
+            {name}
+          </p>
           <Typography>{followers?.toLocaleString()} followers</Typography>
         </div>
         <Rating

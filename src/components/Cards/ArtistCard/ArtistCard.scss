@@ -38,5 +38,12 @@
   &__artist-name {
     font-size: 2rem;
     line-height: 1em;
+    width: 100%;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

@@ -1,7 +1,10 @@
 @use "src/utils";
 .homepage {
   &__container {
-    width: 25%;
+    width: 100%;
+    @media (min-width: utils.$tablet-screen) {
+      width: 35%;
+    }
     &__img {
       position: absolute;
       top: 50%;

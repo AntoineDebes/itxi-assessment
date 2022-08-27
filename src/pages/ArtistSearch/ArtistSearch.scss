@@ -5,7 +5,11 @@
   height: 100%;
   width: 100%;
   @include utils.flexTemplate(flex-start, column, 3em);
-  padding: 2em 4em 2em 4em;
+  padding: 1em 16px 1em 16px;
+
+  @media (min-width: utils.$tablet-screen) {
+    padding: 2em 4em 2em 4em;
+  }
 
   &__form {
     grid-column: 1 / -1;
