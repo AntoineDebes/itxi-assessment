@@ -14,7 +14,8 @@ export function useIsAuthContext() {
 }
 
 export function IsAuthContextProvider({ children }: any) {
-  const [isUserLogedIn, setIsUserLogedIn] = useState<boolean>(false);
+  let isUserLoged: boolean = !!localStorage.getItem("isUserLoged");
+  const [isUserLogedIn, setIsUserLogedIn] = useState<boolean>(isUserLoged);
 
   return (
     <>

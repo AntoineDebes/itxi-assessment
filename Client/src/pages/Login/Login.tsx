@@ -60,6 +60,7 @@ const Login: React.FC<LoginProps> = ({}) => {
       });
       const tokenConcact = `${response.data.token_type} ${response.data.access_token}`;
       localStorage.setItem("accessToken", tokenConcact);
+      localStorage.setItem("isUserLoged", "true");
       setIsButtonLoading({
         loginAsAdmin: false,
         login: false,

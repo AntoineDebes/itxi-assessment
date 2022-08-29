@@ -1,11 +1,13 @@
-import { Snackbar } from "@mui/material";
+import { Button, Snackbar } from "@mui/material";
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
 import AlertMessage from "src/components/AlertMessage/AlertMessage";
 import { useAppDataStoreContext } from "src/context/AppDataStore";
+import { useIsAuthContext } from "src/context/IsAuth";
 import "./MainLayout.scss";
 
 const MainLayout: FC = ({ children }: any) => {
+  const { isUserLogedIn, setIsUserLogedIn } = useIsAuthContext();
   const { snack, setSnack } = useAppDataStoreContext();
   const handleSnackClose = () => {
     setSnack({
@@ -14,7 +16,22 @@ const MainLayout: FC = ({ children }: any) => {
   };
   return (
     <>
-      <header className="layout__header">Spotify Artist Search</header>
+      <div className="layout__header">
+        <header>Spotify Artist Search</header>
+        {isUserLogedIn && (
+          <Button
+            sx={{
+              color: "black",
+            }}
+            onClick={() => {
+              setIsUserLogedIn(false);
+              localStorage.clear();
+            }}
+          >
+            Logout
+          </Button>
+        )}
+      </div>
       <main className="layout__main">
         {children} <Outlet />
         <Snackbar

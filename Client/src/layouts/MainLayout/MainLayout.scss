@@ -2,7 +2,8 @@
 
 .layout {
   &__header {
-    @include utils.flexTemplate(flex-start, row);
+    @include utils.flexTemplate(space-between, row);
+    padding: 0 16px;
     align-items: center;
     text-align: left;
     background-color: #d8d8d8;

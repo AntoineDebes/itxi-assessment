@@ -10,9 +10,11 @@ const SpotifyCallback: React.FC<SpotifyCallbackProps> = ({}) => {
   const navigate = useNavigate();
   useEffect(() => {
     const parsedHash = queryString.parse(window.location.hash);
-    if (!!parsedHash) {
+
+    if (parsedHash?.token_type) {
       const token = `${parsedHash.token_type} ${parsedHash.access_token}`;
       localStorage.setItem("accessToken", token);
+      localStorage.setItem("isUserLoged", "true");
       setIsUserLogedIn(true);
       navigate("/artist-search");
     } else {
