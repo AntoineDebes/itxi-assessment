@@ -13,7 +13,7 @@ interface ArtistAlbumSearchProps {}
 
 const ArtistAlbumSearch: React.FC<ArtistAlbumSearchProps> = ({}) => {
   const [artistAlbumsData, setArtistAlbumsData] = useState<any[]>([]);
-  const [offset, setOffset] = useState<number>(1);
+  const [offset, setOffset] = useState<number>(0);
   const { artistID, artistName } = useParams();
   const pageLimit = 10;
   const [albumsTotalLimit, setAlbumsTotalLimit] = useState<number>(100);
