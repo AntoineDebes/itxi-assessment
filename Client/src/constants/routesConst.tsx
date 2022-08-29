@@ -15,11 +15,11 @@ const routesConst = [
         path: "/",
         component: <HomePage />,
       },
-      {
-        context: <UseFormContextWrapper />,
-        path: "/login",
-        component: <Login />,
-      },
+      // {
+      //   context: <UseFormContextWrapper />,
+      //   path: "/login",
+      //   component: <Login />,
+      // },
       {
         path: "/spotify-callback",
         component: <SpotifyCallback />,

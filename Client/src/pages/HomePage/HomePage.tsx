@@ -11,15 +11,15 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
   return (
     <div className="centered__container">
       <div className="homepage__container">
-        <CustomLoadingButton
+        {/* <CustomLoadingButton
           label="login"
           component={Link}
           to="/login"
           image={SpotifyIconLogo}
           imageAlt="Spotify Logo"
-        />
+        /> */}
         <CustomLoadingButton
-          label="Login with OAuth2"
+          label="Login"
           component={MaterialLing}
           href={`https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&scope=user-read-currently-playing`}
           image={SpotifyIconLogo}

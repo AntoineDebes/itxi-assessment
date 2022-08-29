@@ -28,7 +28,7 @@ const ArtistSearch: React.FC<ArtistSearchProps> = ({}) => {
   } = useAppDataStoreContext();
 
   useEffect(() => {
-    if (artistSearchOffset !== 1) {
+    if (artistSearchOffset !== 0) {
       handleSubmit(handleOnchangeFetchArtists)(debouncedSearchTerm);
     }
   }, [artistSearchOffset]);
@@ -36,7 +36,7 @@ const ArtistSearch: React.FC<ArtistSearchProps> = ({}) => {
   useEffect(() => {
     if (debouncedSearchTerm) {
       setArtistData([]);
-      setArtistSearchOffset(1);
+      setArtistSearchOffset(0);
       handleSubmit(handleOnchangeFetchArtists)(debouncedSearchTerm);
     }
   }, [debouncedSearchTerm]);

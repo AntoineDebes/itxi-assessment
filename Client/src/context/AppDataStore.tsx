@@ -30,7 +30,7 @@ export function useAppDataStoreContext() {
 
 export function AppDataStoreContextProvider({ children }: any) {
   const [artistData, setArtistData] = useState<any>([]);
-  const [artistSearchOffset, setArtistSearchOffset] = useState<number>(1);
+  const [artistSearchOffset, setArtistSearchOffset] = useState<number>(0);
   const [snack, setSnack] = useState<any>({
     message: "",
     color: "",
