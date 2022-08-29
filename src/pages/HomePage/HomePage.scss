@@ -1,6 +1,7 @@
 @use "src/utils";
 .homepage {
   &__container {
+    @include utils.flexTemplate(space-between, column, 0.5em);
     width: 100%;
     @media (min-width: utils.$tablet-screen) {
       width: 35%;

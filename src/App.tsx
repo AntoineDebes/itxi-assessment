@@ -5,6 +5,7 @@ import { FC, useMemo } from "react";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme, CssBaseline } from "@mui/material";
 import { AppDataStoreContextProvider } from "./context/AppDataStore";
+import { IsAuthContextProvider } from "./context/IsAuth";
 
 const App: FC = () => {
   const theme: any = useMemo(
@@ -36,16 +37,18 @@ const App: FC = () => {
     []
   );
   return (
-    <main className="wrapper">
-      <AppDataStoreContextProvider>
-        <Router>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Routes />
-          </ThemeProvider>
-        </Router>
-      </AppDataStoreContextProvider>
-    </main>
+    <div className="wrapper">
+      <IsAuthContextProvider>
+        <AppDataStoreContextProvider>
+          <Router>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <Routes />
+            </ThemeProvider>
+          </Router>
+        </AppDataStoreContextProvider>
+      </IsAuthContextProvider>
+    </div>
   );
 };
 

@@ -36,7 +36,9 @@ const ArtistAlbumCard: React.FC<ArtistAlbumCardProps> = ({
       <div className="card__content-container" style={{ height: "14em" }}>
         <div className="card__content-container__holder">
           <p className="card__artist-name">{name}</p>
-          <Typography>{artistsAlbumList}</Typography>
+          <Typography className="card__artists-album-list">
+            {artistsAlbumList}
+          </Typography>
         </div>
         <div>
           <p>{releaseDate}</p>

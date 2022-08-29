@@ -8,14 +8,12 @@
 .wrapper {
   min-height: 100vh;
   height: 100%;
-  padding: 0 16px;
-  @media (min-width: utils.$tablet-screen) {
-    padding: 0;
-  }
+  width: 100%;
+  @include utils.gridTemplate(1fr, center);
+  grid-template-rows: 3.5em auto;
 }
 
 .centered__container {
-  min-height: 100vh;
   height: 100%;
   width: 100%;
   @include utils.gridTemplate();

@@ -10,10 +10,13 @@ import "./Login.scss";
 import { LoadingButton } from "@mui/lab";
 import { LoginModel } from "src/types/LoginModel";
 import { useAppDataStoreContext } from "src/context/AppDataStore";
+import { useIsAuthContext } from "src/context/IsAuth";
+import { handleResponseNavigation } from "src/utils/utils";
 
 interface LoginProps {}
 
 const Login: React.FC<LoginProps> = ({}) => {
+  const { setIsUserLogedIn } = useIsAuthContext();
   const [isButtonLoading, setIsButtonLoading] = useState<{
     login: boolean;
     loginAsAdmin: boolean;
@@ -57,18 +60,25 @@ const Login: React.FC<LoginProps> = ({}) => {
       });
       const tokenConcact = `${response.data.token_type} ${response.data.access_token}`;
       localStorage.setItem("accessToken", tokenConcact);
+      setIsButtonLoading({
+        loginAsAdmin: false,
+        login: false,
+      });
+      // handleResponseNavigation({
+      //   response: response,
+      //   navigate: navigate,
+      //   navigationLink: "/artist-search",
+      //   setSnack: setSnack,
+      // });
       if (response.status === 200) {
-        navigate("/artist-search");
+        setIsUserLogedIn(true);
         setSnack({
           message: "Welcome",
           open: true,
           severity: "success",
         });
+        navigate("/artist-search");
       }
-      setIsButtonLoading({
-        loginAsAdmin: false,
-        login: false,
-      });
     } catch (error) {
       setIsButtonLoading({
         loginAsAdmin: false,

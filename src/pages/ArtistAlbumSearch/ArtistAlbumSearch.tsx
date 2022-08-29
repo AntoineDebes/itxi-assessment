@@ -59,7 +59,7 @@ const ArtistAlbumSearch: React.FC<ArtistAlbumSearchProps> = ({}) => {
       setAlbumsTotalLimit(response.data?.total);
     } catch {
       setSnack({
-        message: "Something wen wrong",
+        message: "Something went wrong",
         open: true,
         severity: "error",
       });

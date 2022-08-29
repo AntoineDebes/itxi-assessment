@@ -1,0 +1,21 @@
+@use "src/utils";
+
+.layout {
+  &__header {
+    @include utils.flexTemplate(flex-start, row);
+    align-items: center;
+    text-align: left;
+    background-color: #d8d8d8;
+    font-weight: 400;
+    height: 100%;
+    font-size: 1.2rem;
+    width: 100%;
+  }
+  &__main {
+    padding: 0 16px;
+    width: 100%;
+    @media (min-width: utils.$tablet-screen) {
+      padding: 0;
+    }
+  }
+}
