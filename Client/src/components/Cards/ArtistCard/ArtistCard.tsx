@@ -23,6 +23,9 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
   artistID,
   className,
 }) => {
+  useEffect(() => {
+    console.log("rendered", name);
+  }, []);
   const transformedPopularityIntoDividedByFive =
     popularity && (popularity * 5) / 100;
 

@@ -67,12 +67,8 @@ const ArtistAlbumSearch: React.FC<ArtistAlbumSearchProps> = ({}) => {
   };
   return (
     <div className={styles.pageContainer}>
-      {artistAlbumsData.length && (
-        <>
-          <Typography variant="h3">{artistName}</Typography>
-          <Typography>Albums</Typography>
-        </>
-      )}
+      <Typography variant="h3">{artistName}</Typography>
+      <Typography>Albums</Typography>
       <div className="artist-search__cards-container">
         {artistAlbumsData?.map((_item: any, i: number) => (
           <ArtistAlbumCard
